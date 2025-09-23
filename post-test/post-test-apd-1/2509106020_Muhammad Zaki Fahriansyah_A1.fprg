@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="4.2">
+    <attributes>
+        <attribute name="name" value="2509106020_Muhammad Zaki Fahriansyah_A'25_praktikum"/>
+        <attribute name="authors" value="Hype GLK"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2025-09-14 08:22:26 PM"/>
+        <attribute name="created" value="SHlwZSBHTEs7WkFGQUE7MjAyNS0wOS0xNDswNTo1NzozMCBQTTsyMzAy"/>
+        <attribute name="edited" value="SHlwZSBHTEs7WkFGQUE7MjAyNS0wOS0xNDswODoyMjoyNiBQTTsxOzI0MTA="/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <declare name="Nilai" type="Integer" array="False" size=""/>
+            <output expression="&quot;Masukkan Nilai&quot;" newline="True"/>
+            <input variable="Nilai"/>
+            <if expression="Nilai &gt;= 80">
+                <then>
+                    <output expression="&quot;Nilai A&quot;" newline="True"/>
+                </then>
+                <else>
+                    <if expression="Nilai &gt;= 70 and Nilai &lt;= 79">
+                        <then>
+                            <output expression="&quot;Nilai B&quot;" newline="True"/>
+                        </then>
+                        <else>
+                            <if expression="Nilai &gt;= 60 and Nilai &lt;= 69">
+                                <then>
+                                    <output expression="&quot;Nilai C&quot;" newline="True"/>
+                                </then>
+                                <else>
+                                    <output expression="&quot;Nilai D&quot;" newline="True"/>
+                                </else>
+                            </if>
+                        </else>
+                    </if>
+                </else>
+            </if>
+        </body>
+    </function>
+</flowgorithm>
