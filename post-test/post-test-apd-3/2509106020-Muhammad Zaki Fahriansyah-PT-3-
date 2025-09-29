@@ -1,0 +1,62 @@
+username = 'zaki'
+password = '020'
+
+print('=== Selamat Datang di Toko Murmer ===')
+status = input('Apakah Anda member? (ya/tidak): ')
+
+if status == 'ya':
+    user = input('Masukkan username: ')
+    pw = input('Masukkan password: ')
+
+    login = True if user == username and pw == password else False
+    if login:
+        print('Login berhasil! Silahkan berbelanja.')
+    else:
+        print('Login gagal! Program selesai.')
+        exit()
+elif status == 'tidak':
+    print('Silahkan berbelanja sebagai non-member')
+else:
+    print('Input tidak valid! Program selesai.')
+    exit()
+
+print('\n========== Menu Belanja ==========')
+print(f"{'1. Buku tulis':20} - Rp.{18000}")
+print(f"{'2. Pulpen kokoro':20} - Rp.{7500}")
+print(f"{'3. Penghapus':20} - Rp.{2500}")
+print(f"{'4. Penggaris':20} - Rp.{5000}")
+print(f"{'5. Pensil':20} - Rp.{3000}")
+
+pilihan = int(input('Pilih barang anda (1-5): '))
+
+if pilihan == 1:
+    harga = 18000
+elif pilihan == 2:
+    harga = 7500
+elif pilihan == 3:
+    harga = 2500
+elif pilihan == 4:
+    harga = 5000
+elif pilihan == 5:
+    harga = 3000
+else:
+    harga = 0
+    print('Barang tidak tersedia!')
+    exit()
+
+jumlah = int(input('Masukkan jumlah barang: '))
+
+total = harga * jumlah
+
+if status == 'ya':
+    diskon = 0.1 * total
+else:
+    diskon = 0
+
+total_bayar = total - diskon
+
+print(f'\n=========== Struk Belanja ===========')
+print(f'Total harga sebelum diskon : Rp.{total}')
+print(f'Potongan diskon            : Rp.{diskon}')
+print(f'Total yang harus dibayar   : Rp.{total_bayar}')
+print('Terimakasih telah berbelanja di toko murmer!')
