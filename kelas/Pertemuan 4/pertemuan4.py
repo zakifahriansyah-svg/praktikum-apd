@@ -21,8 +21,8 @@
 #     jawab = input("Ulang lagi? ")
 #     print(f"Total perulangan: {hitung}")
 
-# for i in range(1, 10):
-#     print('#' * i)
+# for i in range(7, 0, -1):
+#     print('*' * i)
 
 # angka = [2, 5, 8, 12, 15, 7, 20]
 # print("Mencari angka pertama yang lebih besar dari 10...")
@@ -33,8 +33,8 @@
 #         break
 # print("Program selesai.")
 
-for i in range(1, 11):
-    if i % 2 != 0:
-        continue
-    print(f"Angka genap ditemukan: {i}")
-print("\nProgram selesai.")
+# for i in range(1, 11):
+#     if i % 2 != 0:
+#         continue
+#     print(f"Angka genap ditemukan: {i}")
+# print("\nProgram selesai.")

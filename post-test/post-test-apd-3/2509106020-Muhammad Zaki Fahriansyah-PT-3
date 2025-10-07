@@ -49,7 +49,7 @@ jumlah = int(input('Masukkan jumlah barang: '))
 total = harga * jumlah
 
 if status == 'ya':
-    diskon = 0.1 * total
+    diskon = 0.15 * total
 else:
     diskon = 0
 
