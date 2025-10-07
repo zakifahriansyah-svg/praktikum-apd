@@ -119,4 +119,4 @@ while ulang_transaksi == 'y':
         break
     else:
         os.system('cls')
-        ulangi_transaksi = 'y'
+        ulang_transaksi = 'y'
