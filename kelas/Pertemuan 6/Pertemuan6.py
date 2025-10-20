@@ -24,10 +24,10 @@
 #     "Social Media" : {"Instagram" : "daffahrhap"}
 # }
 
-# # # print(Biodata)
-# # for i, j in Biodata.items():
-# #     print(i)
-# #     print(j)
+# print(Biodata)
+# for i, j in Biodata.items():
+#     print(i)
+#     print(j)
 
 # print(f"nama saya adalah {Biodata['Nama']}")
 # print(f"Instagram : {Biodata['Social Media']['Instagram']}")

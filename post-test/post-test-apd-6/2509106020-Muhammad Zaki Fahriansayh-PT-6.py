@@ -1,7 +1,11 @@
 import os
 
-akun = [["admin", "123", "admin"]]
-jadwal = [["admin", []]]
+akun = {
+    "admin" : {"password" : "123", "role" : "admin"}
+}
+jadwal = {
+    "admin" : []
+}
 ulang = True
 
 while ulang:
@@ -15,17 +19,13 @@ while ulang:
     if menu == "1":
         user = input("Masukkan Username: ")
         pw = input("Masukkan Password: ")
-        login = False
-        role = ""
 
-        for i in range(len(akun)):
-            if akun [i][0] == user and akun[i][1] == pw:
-                print("Login Berhasil!")
-                login = True
-                role = akun[i][2]
-                break
+        if user in akun and akun[user]["password"] == pw:
+            print("Login Berhasil!")
+            role = akun[user]["role"]
+            input("Tekan Enter untuk lanjut...")
 
-        if not login:
+        else:
             print("Login Gagal! Username atau Password Salah!")
             input("Tekan Enter untuk lanjut...")
             continue
@@ -45,38 +45,47 @@ while ulang:
                 print("5. Logout")
             pilih = input("Pilih menu: ")
 
-            for data in jadwal:
-                if data[0] == user:
-                    break
+            if user not in jadwal:
+                jadwal[user] = []
             if pilih == "1":
                 os.system('cls||clear')
                 print("=== JADWAL KAMU ===")
-                if len(data[1]) == 0:
+                if len(jadwal[user]) == 0:
                     print("Belum ada jadwal.")
                 else:
-                    for i in range(len(data[1])):
-                        j = data[1][i]
-                        print(f"{i+1}. {j[0]} | {j[1]} | {j[2]} | Status: {j[3]}")
+                    no = 1
+                    for j in jadwal[user]:
+                        print(f"{no}. {j['kegiatan']} | {j['tanggal']} | {j['waktu']} | Status: {j['status']}")
+                        no += 1
 
             elif pilih == "2":
                 kegiatan = input("Nama Kegiatan: ")
                 tanggal = input("Tanggal (YYYY/MM/DD): ")
                 waktu = input("Waktu (HH:MM): ")
-                status = "belum"
-                data[1].append([kegiatan, tanggal, waktu, status])
-                print("Jadwal berhasil ditambahkan!")
+
+                if kegiatan == "" or tanggal == "" or waktu == "":
+                    print("Data tidak boleh kosong!")
+                else:
+                    jadwal[user].append({
+                        "kegiatan": kegiatan,
+                        "tanggal": tanggal,
+                        "waktu": waktu,
+                        "status": "belum"
+                    })
+                    print("Jadwal berhasil ditambahkan!")
 
             elif pilih == "3":
-                if len(data[1]) == 0:
+                if len(jadwal[user]) == 0:
                     print("Tidak ada jadwal untuk diubah.")
                 else:
-                    for i in range(len(data[1])):
-                        j = data[1][i]
-                        print(f"{i+1}. {j[0]} | {j[1]} | {j[2]} | Status: {j[3]}")
+                    no = 1
+                    for j in jadwal[user]:
+                        print(f"{no}. {j['kegiatan']} | {j['tanggal']} | {j['waktu']} | Status: {j['status']}")
+                        no += 1
 
                     pilih = input("Pilih nomor jadwal: ")
 
-                    if pilih.isdigit() and 1 <= int(pilih) <= len(data[1]):
+                    if pilih.isdigit() and 1 <= int(pilih) <= len(jadwal[user]):
                         print("1. Ubah Jadwal")
                         print("2. Ubah Status")
                         ubah = input("Pilih: ")
@@ -85,13 +94,13 @@ while ulang:
                             kegiatan = input("Masukkan kegiatan baru: ")
                             tanggal = input("Masukkan tanggal baru (YYYY/MM/DD): ")
                             waktu = input("Masukkan waktu baru (HH:MM): ")
-                            data[1][int(pilih)-1][0] = kegiatan
-                            data[1][int(pilih)-1][1] = tanggal
-                            data[1][int(pilih)-1][2] = waktu
+                            jadwal[user][int(pilih)-1]['kegiatan'] = kegiatan
+                            jadwal[user][int(pilih)-1]['tanggal'] = tanggal
+                            jadwal[user][int(pilih)-1]['waktu'] = waktu
                             print("Jadwal berhasil diubah!")
 
                         elif ubah == "2":
-                            data[1][int(pilih)-1][3] = "selesai"
+                            jadwal[user][int(pilih)-1]['status'] = "selesai"
                             print("Status berhasil diubah menjadi 'selesai'!")
 
                         else:
@@ -101,29 +110,31 @@ while ulang:
 
 
             elif pilih == "4":
-                if len(data[1]) == 0:
+                if len(jadwal[user]) == 0:
                     print("Tidak ada jadwal untuk dihapus.")
                 else:
-                    for i in range(len(data[1])):
-                        j = data[1][i]
-                        print(f"{i+1}. {j[0]} | {j[1]} | {j[2]} | Status: {j[3]}")
+                    no = 1
+                    for j in jadwal[user]:
+                        print(f"{no}. {j['kegiatan']} | {j['tanggal']} | {j['waktu']} | Status: {j['status']}")
+                        no += 1
                     hapus = input("Pilih nomor jadwal yang ingin dihapus: ")
-                    if hapus.isdigit() and 1 <= int(hapus) <= len(data[1]):
-                        del data[1][int(hapus)-1]
+                    if hapus.isdigit() and 1 <= int(hapus) <= len(jadwal[user]):
+                        del jadwal[user][int(hapus)-1]
                         print("Jadwal berhasil dihapus!")
                     else:
                         print("Nomor tidak valid!")
 
             elif pilih == "5" and role == "admin":
                 print("=== SEMUA JADWAL PENGGUNA ===")
-                for data in jadwal:
-                    print(f"\nUser: {data[0]}")
-                    if len(data[1]) == 0:
+                for username, data in jadwal.items():
+                    print(f"\nUser: {username}")
+                    if not data:
                         print("  (Belum ada jadwal)")
                     else:
-                        for i in range(len(data[1])):
-                            j = data[1][i]
-                            print(f"   {i+1}. {j[0]} | {j[1]} | {j[2]} | Status: {j[3]}")
+                        no = 1
+                        for j in data:
+                            print(f"{no}. {j['kegiatan']} | {j['tanggal']} | {j['waktu']} | Status: {j['status']}")
+                            no += 1
 
             elif (pilih == "5" and role != "admin") or (pilih == "6" and role == "admin"):
                 print("Logout berhasil.")
@@ -139,17 +150,13 @@ while ulang:
         user = input("Buat username: ")
         pw = input("Buat password: ")
 
-        duplikat = False
-        for data in akun:
-            if data[0] == user:
-                duplikat = True
-                break
-
-        if duplikat:
+        if user == '' or pw == '':
+            print("Username dan Password tidak boleh kosong!")
+        elif user in akun:
             print("Username sudah dipakai!")
         else:
-            akun.append([user, pw, "user"])
-            jadwal.append([user, []])
+            akun[user] = {"password": pw, "role": "user"}
+            jadwal[user] = []
             print("Akun berhasil dibuat! Silahkan Login Kembali.")
         input("Tekan Enter untuk melanjutkan...")
 
